@@ -47,5 +47,5 @@ where id=<cfqueryparam value="#url.surveyid#">
 </script>
 
 <cfif not url.isAJAX>
-	<rde:header mode="end">
+	<rde:header mode="end" page="takesurvey" import="../">
 </cfif>

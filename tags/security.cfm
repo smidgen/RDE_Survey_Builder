@@ -1,4 +1,4 @@
-﻿<cfif session.isLoggedIn>
+﻿<cfif isdefined("session.isLoggedIn") and session.isLoggedIn>
 	<cfoutput>
 		<p>
 			ID: #session.user.id#<br />

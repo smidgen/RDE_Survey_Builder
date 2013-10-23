@@ -15,5 +15,5 @@
 <rde:security>
 
 <cfif not url.isAJAX>
-	<rde:header mode="end">
+	<rde:header mode="end" page="login">
 </cfif>

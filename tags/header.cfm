@@ -20,7 +20,7 @@
 <body >
 	
 	<div class="container" >
-	<header class="row">
+	<header class="row" >
     	<h1 class="col-md-12"><center><img src="<cfoutput>#attributes.import#</cfoutput>assets/img/logo.jpg" />&nbsp;RDE Systems Survey Builder</center></h1>
     </header>
 	
