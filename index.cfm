@@ -10,7 +10,7 @@
 
 
 <p>pageroot: <cfoutput>#application.pageroot#</cfoutput></p>
-<rde:security>
+
 
 <cfif not url.isAJAX>
 	<rde:header mode="end" page="index">
