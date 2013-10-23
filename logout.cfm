@@ -8,7 +8,9 @@
 
 <cfset session.isLoggedIn = false>
 <cfset structClear(session.user)>
-
+<script>
+self.location="index.cfm";
+</script>
 
 <cfif not url.isAJAX>
 	<rde:header mode="end" page="logout">
