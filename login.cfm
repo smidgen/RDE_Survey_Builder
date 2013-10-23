@@ -6,10 +6,18 @@
 	<rde:header mode="start" page="login">
 </cfif>
 
-<cfset session.isLoggedIn = true>
-<cfset session.user = {}>
-<cfset session.user.id = 123>
-<cfset session.user.name = "Joe">
+<form action="login_process.cfm" method="post">
+
+      Username: <input type="text" name="user_name" value=""><BR />
+
+      Password: <input type="password" name="user_pass" value=""><BR />
+
+      <input type="submit" name="login_user" value="Log In"><BR />
+
+</form>
+
+
+
 
 <cfoutput>Status:</cfoutput>
 <rde:security>

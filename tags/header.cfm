@@ -45,7 +45,7 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Survey Builder <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li><a href="#">Build New Survey</a></li>
+          <li <cfif attributes.page eq "builder">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>builder/builder.cfm">Build New Survey</a></li>
           <li><a href="#">Edit Survey</a></li>
         </ul>
       </li>

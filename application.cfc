@@ -2,10 +2,17 @@
 	<cfset this.Name = "RDESurveyBuilder">
 	<cfset this.SessionManagement = true>
 	<cfset this.applicationtimeout="#createTimeSpan(0,0,0,1)#">
+	<cfset this.sessiontimeout="#createTimeSpan(0,0,1,0)#">
+	<cfset this.clientmanagement = true>
+
 	
 	<cffunction name="OnApplicationStart" output="false">
-		<cfset application.bananas = "yum">
+		<cfset application.pageroot = "http://localhost:8500/projects/RDE/">
 		<cfset application.dataDSN = "database_dbsource">
 		<cfsetting showdebugoutput="false" />
 	</cffunction>
+	
+
+
 </cfcomponent>
+

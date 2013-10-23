@@ -8,8 +8,8 @@
 
 <p>Hello world!</p>
 
-<p>Bananas: <cfoutput>#application.bananas#</cfoutput></p>
 
+<p>pageroot: <cfoutput>#application.pageroot#</cfoutput></p>
 <rde:security>
 
 <cfif not url.isAJAX>
