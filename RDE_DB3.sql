@@ -1,4 +1,4 @@
-��USE [RDE_DB]
+USE [RDE_DB] /*<----- Change that to whatever your coldfusion datasource is*/
 
 GO
 
