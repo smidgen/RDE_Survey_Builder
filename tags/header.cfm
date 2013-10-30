@@ -8,9 +8,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Up and Running with Bootstrap</title>
+<title>RDE Survey Builder</title>
+
 <link href="<cfoutput>#attributes.import#</cfoutput>assets/css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="<cfoutput>#attributes.import#</cfoutput>assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+<style>
+	html, body {
+   		 height: 100%;
+	}
+	body {
+		background-color: #C0C0C0;
+		padding-top: 40px;
+	}
+	.container {
+		
+		padding: 10px;
+		padding-top: 20px;
+		box-shadow: 0 0 30px black;
+		background-color: #FFFFFF;
+		height: 100%;
+	}
+	.pagefooter {
+		
+		font-color: black;
+	}
+	.topnavbar {
+		background-color: #126aa9;
+		
+	}
+	.navbar .nav  > li > a  {
+
+    color:  #eee;
+	}
+
+</style>
 <!-- HTML5 shim for IE backwards compatibility -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -18,14 +49,8 @@
 </head>
 
 <body >
-	
-	<div class="container" >
-	<header class="row" >
-    	<h1 class="col-md-12"><center><img src="<cfoutput>#attributes.import#</cfoutput>assets/img/logo.jpg" />&nbsp;RDE Systems Survey Builder</center></h1>
-    </header>
-	
-	
-	<nav class="navbar navbar-default" role="navigation">
+
+  <nav class=" topnavbar navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -34,7 +59,7 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">Home</a>
+    <a class="navbar-brand" style="color: #eee;" href="<cfoutput>#application.pageroot#</cfoutput>">RDE Systems Survey Builder</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,7 +77,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><cfif isdefined("session.isLoggedIn") and session.isLoggedIn><cfoutput>#session.user.name#</cfoutput><cfelse>User</cfif> <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li <cfif attributes.page eq "login">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>login.cfm">Login</a></li>
           <li <cfif attributes.page eq "logout">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>logout.cfm">Logout</a></li>
@@ -62,12 +87,15 @@
     </ul>
   </div><!-- /.navbar-collapse -->
 </nav>
+	
+<div class="container fill">
 
 <cfelse>
-	<footer class="navbar navbar-inner navbar-fixed-bottom col-md-12" style="background-color: #c0c0c0;">
+	</div>
+	<footer class="pagefooter navbar navbar-inner navbar-fixed-bottom col-md-12">
     	<p class="muted credit"><center>&copy; RDE Systems</center></p>
 	</footer>
- </div>
+
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="<cfoutput>#attributes.import#</cfoutput>assets/js/bootstrap.min.js"></script>

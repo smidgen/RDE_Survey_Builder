@@ -22,7 +22,7 @@
 <cfset session.isLoggedIn = true>
 <cfset session.user = {}>
 <cfset session.user.id = 123>
-<cfset session.user.name = "Joe">
+<cfset session.user.name = "Josh">
 <script>
 self.location="index.cfm";
 </script>

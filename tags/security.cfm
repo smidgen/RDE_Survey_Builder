@@ -13,7 +13,7 @@
 		<h3 style="color: red;">Not logged in</h3>
 		<a href="<cfoutput>#application.pageroot#</cfoutput>">back</a>
 		
-							<footer class="navbar navbar-inner navbar-fixed-bottom col-md-12" style="background-color: #c0c0c0;">
+							<footer class="navbar navbar-inner navbar-fixed-bottom col-md-12" >
     	<p class="muted credit"><center>&copy; RDE Systems</center></p>
 	</footer>
  </div>
