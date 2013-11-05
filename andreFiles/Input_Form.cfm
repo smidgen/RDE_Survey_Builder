@@ -11,6 +11,18 @@
 	VALUES('#Form.Name#')
 	
 </cfquery>
+
+<cfquery name="getSurveyid" datasource="ANDRE-LAPTOPSQLEXPRESS3">
+
+SELECT TOP 1 *
+FROM dbo.Survey
+ORDER BY id DESC
+
+</cfquery>
+
+<cfoutput query="getSurveyid">
+	<cfset Surveyid = getSurveyid.id>
+</cfoutput>
  
 <cfloop index="i" from="1" to="#variables.Counter#">
 
@@ -18,8 +30,8 @@
 	
 	<cfquery datasource="ANDRE-LAPTOPSQLEXPRESS3" name="addQuestion" > 
 	
-	INSERT INTO dbo.Question (Question)
-	VALUES (<cfqueryparam value="#variables.Question#" cfsqltype="cf_sql_varchar">)
+	INSERT INTO dbo.Question (Question, Survey_id)
+	VALUES (<cfqueryparam value="#variables.Question#" cfsqltype="cf_sql_varchar"> , <cfqueryparam value="#Surveyid#" cfsqltype="cf_sql_int">)
 	
 	</cfquery>
 	

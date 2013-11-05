@@ -2,7 +2,12 @@
 <head> 
 
 <title>Insert Data Form</title> 
+
+<script src="jquery.js"></script>
+<script src="test.js"></script>
+
 <script src="addInput.js" language="Javascript" type="text/javascript"></script>
+
 
 <cfquery name="getSurveyid" datasource="ANDRE-LAPTOPSQLEXPRESS3">
 
