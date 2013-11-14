@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RDE Survey Builder</title>
+<title>Survey Builder</title>
 
 <link href="<cfoutput>#attributes.import#</cfoutput>assets/css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="<cfoutput>#attributes.import#</cfoutput>assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
@@ -59,33 +59,39 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" style="color: #eee;" href="<cfoutput>#application.pageroot#</cfoutput>">RDE Systems Survey Builder</a>
+	<img  style="height: 50px;" src="<cfoutput>#attributes.import#</cfoutput>assets/img/header.jpg" >
+    
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
+  <cfif isdefined("session.isLoggedIn") and session.isLoggedIn>
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
-      <li <cfif attributes.page eq "index">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>index.cfm">Welcome Page</a></li>
-      <li <cfif attributes.page eq "takesurvey">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>surveys/takesurvey.cfm">Take a Survey</a></li>
+      <li <cfif attributes.page eq "index">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>index.cfm">Home Page</a></li>
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Survey Builder <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li <cfif attributes.page eq "builder">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>builder/builder.cfm">Build New Survey</a></li>
+          <li <cfif attributes.page eq "builder">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>builder/surveyMake.cfm">Build New Survey</a></li>
           <li><a href="#">Edit Survey</a></li>
         </ul>
       </li>
+	  <li <cfif attributes.page eq "admin">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>admin.cfm">Survey List</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+    	
+    	
+    	
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><cfif isdefined("session.isLoggedIn") and session.isLoggedIn><cfoutput>#session.user.name#</cfoutput><cfelse>User</cfif> <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <li <cfif attributes.page eq "login">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>login.cfm">Login</a></li>
+          
           <li <cfif attributes.page eq "logout">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>logout.cfm">Logout</a></li>
 
         </ul>
       </li>
     </ul>
   </div><!-- /.navbar-collapse -->
+  </cfif>
 </nav>
 	
 <div class="container fill">
@@ -93,7 +99,7 @@
 <cfelse>
 	</div>
 	<footer class="pagefooter navbar navbar-inner navbar-fixed-bottom col-md-12">
-    	<p class="muted credit"><center>&copy; RDE Systems</center></p>
+    	<p class="muted credit"><center><img style="height: 50px;" src="<cfoutput>#attributes.import#</cfoutput>assets/img/footer.png" ></center></p>
 	</footer>
 
 
