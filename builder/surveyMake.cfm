@@ -6,13 +6,12 @@
 	<rde:header mode="start" page="builder" import="../">
 </cfif>
 <rde:security>
-<script src="jquery.js"></script>
-<script src="test.js"></script>
+	
 
 <script src="addInput.js" language="Javascript" type="text/javascript"></script>
 
 
-<cfquery name="getSurveyid" datasource="#application.dataDSN#">
+<cfquery name="getSurveyid" datasource="#application.cfc#">
 
 SELECT TOP 1 *
 FROM dbo.Survey
@@ -41,9 +40,10 @@ ORDER BY id DESC
 		
 			<br>
 			Questions:
-			<input type="button" value="Add another text input" onClick="addInput('dynamicInput', '1');"> 
-			<input type="button" value="Add another checkbox input" onClick="addInput('dynamicInput', '2');">
-			<input type="button" value="Add another radio button input" onClick="addInput('dynamicInput', '3');">
+			<input type="button" value="Add a text input" onClick="addInput('dynamicInput', '1');"> 
+			<input type="button" value="Add a checkbox input" onClick="addInput('dynamicInput', '2');">
+			<input type="button" value="Add a radio button input" onClick="addInput('dynamicInput', '3');">
+			<input type="button" value="Add a dropdown option" onClick="addInput('dynamicInput', '4');">
 			<br>
 		
 		
@@ -52,6 +52,8 @@ ORDER BY id DESC
 &nbsp;
 
 <input type="hidden" id="counter" name="counter" value=""/>
+
+<input type="hidden" id="responseCounter" name="responseCounter" value=""/>
 
 <input type="submit" onClick= "submit_form()" value="Submit" ;">&nbsp;<input type="Reset" value="Clear Form">
 
