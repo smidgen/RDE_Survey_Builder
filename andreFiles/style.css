@@ -1,0 +1,15 @@
+body{
+height:auto;
+text-align:center;
+position:relative;
+}
+
+.container{
+min-height:630px;
+}
+
+#footerTry{
+text-align:center;
+bottom:0px;
+width:100%;
+}

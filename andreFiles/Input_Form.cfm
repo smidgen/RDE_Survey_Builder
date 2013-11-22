@@ -1,5 +1,17 @@
-<html> 
-<cfdump var="#form#" />
+<cfimport prefix="rde" taglib="../tags/">
+
+<cfparam name="url.isAJAX" default="false">
+
+<cfif not url.isAJAX>
+	<rde:header mode="start" page="builder" import="../">
+</cfif>
+<rde:security>
+
+
+<html>
+ 
+<link rel="stylesheet" type="text/css" href="style.css" />
+
 <head> <title>Input form</title> </head> 
  
 <body> 
@@ -8,12 +20,8 @@
  
  <cfset variables.responseCounter=FORM["responseCounter"]>
  
-<cfquery datasource="ANDRE-LAPTOPSQLEXPRESS3" name="addSurvey" > 
-	
-	INSERT INTO dbo.Survey(Name)
-	VALUES('#Form.Name#')
-	
-</cfquery>
+ <cfset variables.randId=FORM["randId"]>
+ 
 
 <cfquery name="getSurveyid" datasource="ANDRE-LAPTOPSQLEXPRESS3">
 
@@ -30,10 +38,21 @@ ORDER BY id DESC
 </cfoutput>
 
 
+<!---<cfset variables.uniqueId = randId & Surveyid>--->
+
+
+<cfquery datasource="ANDRE-LAPTOPSQLEXPRESS3" name="addSurvey" > 
+	
+	INSERT INTO dbo.Survey(Name , surveyKey)
+	VALUES('#Form.Name#', '#randId#')
+	
+</cfquery>
+
+
  
 <cfloop index="i" from="1" to="#variables.Counter#">
 
-	<cfloop index="a" from= "1" to="4">
+	<cfloop index="a" from= "1" to="5">
 	
 	<cfif isdefined('form.Question#i#_#a#')>
 	
@@ -79,11 +98,44 @@ ORDER BY id DESC
 	
 	
 	
-	<cfoutput> #Form.Name# #variables.Question# </cfoutput> 
+	<!---<cfoutput> #Form.Name# #variables.Question# #variables.randId#  </cfoutput> --->
 	
  </cfloop>
  
 <h1>Survey Added</h1> 
 
+<br>
+
+Survey Name is: <cfoutput> #Form.Name# </cfoutput>
+
+<br>
+Questions Added: <br>
+<cfloop index="i" from="1" to="#variables.Counter#">
+	<cfloop index="a" from= "1" to="5">
+	
+		<cfif isdefined('form.Question#i#_#a#')>
+		
+		<cfset variables.Question= FORM["Question"&i&"_"&a]>
+		
+			 <cfoutput> #variables.Question# </cfoutput>
+			
+			<br>
+			
+		</cfif>
+		
+		
+		
+	</cfloop>
+	
+</cfloop>
+
+Survey Key: <cfoutput> #variables.randId# </cfoutput>
+
+<br>
+
 </body> 
 </html>
+
+<cfif not url.isAJAX>
+	<rde:header mode="end" page="index" import="../">
+</cfif>
