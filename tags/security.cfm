@@ -1,4 +1,5 @@
 ﻿<cfparam name="attributes.restricted" default="true">
+<cfparam name="attributes.import" default="./">
 
 <cfif #attributes.restricted# EQ "true">
 	<cfif isdefined("session.isLoggedIn") and session.isLoggedIn>

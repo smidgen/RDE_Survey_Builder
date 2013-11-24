@@ -9,10 +9,10 @@
 	.tablebutton{
 		width: 80px;
 	}
-	a:link {color:#000;text-decoration:none;}      /* unvisited link */
-a:visited {color:#000;text-decoration:none;}  /* visited link */
-a:hover {color:#000;text-decoration:none;}  /* mouse over link */
-a:active {color:#000;text-decoration:none;}  /* selected link */
+	a:link {color:#000;text-decoration:none;}
+	a:visited {color:#000;text-decoration:none;}
+	a:hover {color:#000;text-decoration:none;}
+	a:active {color:#000;text-decoration:none;}
 </style>
 <rde:security>
 <div class="page-header">
@@ -31,20 +31,24 @@ a:active {color:#000;text-decoration:none;}  /* selected link */
 		        
 		        surveys = q.execute().getResult();
 				
-					WriteOutput('<div class="list-group">');
+					
 				
-				  for (row = 1 ; row LTE surveys.RecordCount ; row = (row + 1)){
-				   		 WriteOutput('<a class="list-group-item" href="' & application.pageroot & 'surveys/takesurvey.cfm?surveyname=' & surveys[ "Name" ][ row ] & '">
-				      	' & surveys[ "Name" ][ row ] & '
-				    	</a>
-				    	');				    
+				 	for (row = 1 ; row LTE surveys.RecordCount ; row = (row + 1)){
+				 		WriteOutput('<tr>');
+				  		WriteOutput('<td>' & surveys[ "Name" ][ row ] & '</td>');
+				  		WriteOutput('<td>' & 'no description' & '</td>');
+				   		WriteOutput('<td class="active tablebutton"><a href="' & application.pageroot & 'surveys/takesurvey.cfm?surveykey=' & surveys[ "surveyKey" ][ row ] & '">Take</a></td>');
+				   		WriteOutput('<td class="success tablebutton"><a href="' & application.pageroot & 'surveys/viewresults.cfm?surveykey=' & surveys[ "surveyKey" ][ row ] & '">Results</a></td>');
+				   		WriteOutput('<td class="warning tablebutton"><a href="' & application.pageroot & 'builder/editsurvey.cfm?surveyid=' & surveys[ "Name" ][ row ] & '">Edit</a></td>');
+				   		WriteOutput('<td class="danger tablebutton"><a href="' & application.pageroot & 'surveys/deletesurvey.cfm?surveyid=' & surveys[ "id" ][ row ] & '">Delete</a></td>');		    
+						WriteOutput('</tr>');
 					}
 					
-					WriteOutput('</div>');
+					
 			}
 				
 </cfscript>
-<!--- <cfoutput>#showlist()#</cfoutput> --->
+
 
 <div class="table-responsive">
   <table class="table table-bordered">
@@ -53,30 +57,7 @@ a:active {color:#000;text-decoration:none;}  /* selected link */
 		<td><strong>Description</strong></td>
 		<td colspan="4"><strong>Tools</strong></td>
 	</tr>
-	<tr>
-    	<td>Sample Survey 1</td>
-		<td>A Sample survey about basic personal information</td>
-	  	<td class="active tablebutton"><a href=surveys/takesurvey.cfm?surveyname=Sample%20Survey>Take</a></td>
-	  	<td class="success tablebutton">Results</td>
-	  	<td class="warning tablebutton">Edit</td>
-	  	<td class="danger tablebutton">Delete</td>
-	</tr>
-	<tr>
-    	<td>Sample Survey 2</td>
-		<td>A Sample survey for programmatic testing</td>
-	  	<td class="active tablebutton">Take</td>
-	  	<td class="success tablebutton">Results</td>
-	  	<td class="warning tablebutton">Edit</td>
-	  	<td class="danger tablebutton">Delete</td>
-	</tr>
-	<tr>
-    	<td>Sample Survey 3</td>
-		<td>A Second sample survey for programmatic testing</td>
-	  	<td class="active tablebutton">Take</td>
-	  	<td class="success tablebutton">Results</td>
-	  	<td class="warning tablebutton">Edit</td>
-	  	<td class="danger tablebutton">Delete</td>
-	</tr>
+	<cfoutput>#showlist()#</cfoutput>
   </table>
 </div>
 <cfif not url.isAJAX>

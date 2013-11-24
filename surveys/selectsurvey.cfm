@@ -50,13 +50,13 @@
 							</div>
 							<div class="indexpage col-md-offset-3 col-md-6">
 								<div class="text-center loginhead">
-									<h3>Enter Survey ID</h3>
+									<h3>Enter Survey Key</h3>
 								</div>
 							<form class="form-horizontal " role="form" action="takesurvey.cfm" method="GET">
 							  <div class="form-group">
-							    <label for="surveyid" class="col-sm-4 control-label">Survey Name</label>
+							    <label for="surveykey" class="col-sm-4 control-label">Survey Key</label>
 							    <div class="col-sm-6">
-							      <input type="text" class="form-control" id="surveyid" name="surveyid" placeholder="Survey ID">
+							      <input type="text" class="form-control" id="surveykey" name="surveykey" placeholder="Survey Key">
 							    </div>
 							  </div>
 							

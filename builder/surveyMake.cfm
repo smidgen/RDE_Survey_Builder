@@ -7,11 +7,12 @@
 </cfif>
 <rde:security>
 	
+<link rel="stylesheet" type="text/css" href="style.css" />
 
 <script src="addInput.js" language="Javascript" type="text/javascript"></script>
 
 
-<cfquery name="getSurveyid" datasource="#application.cfc#">
+<cfquery name="getSurveyid" datasource="#application.dataDSN#">
 
 SELECT TOP 1 *
 FROM dbo.Survey
@@ -22,7 +23,7 @@ ORDER BY id DESC
 </head> 
  
 <body> 
-<h2>Insert Data Form</h2> 
+<h2>Survey Builder</h2> 
 
 
 <form id="mainForm" action="Input_Form.cfm" method="post"> 
@@ -30,24 +31,27 @@ ORDER BY id DESC
 
     Survey ID: <cfoutput query="getSurveyid">#id#</cfoutput>
 	<br>
-	
+	<br>
    Survey Name:
     <input type="Text" name="Name" size="35" maxlength="50">
-
 	<br>
-	
+	<br>
+<div id="wrapper" style="min-height:100%">	
 	<div id="dynamicInput">
 		
 			<br>
+			
 			Questions:
-			<input type="button" value="Add a text input" onClick="addInput('dynamicInput', '1');"> 
-			<input type="button" value="Add a checkbox input" onClick="addInput('dynamicInput', '2');">
-			<input type="button" value="Add a radio button input" onClick="addInput('dynamicInput', '3');">
-			<input type="button" value="Add a dropdown option" onClick="addInput('dynamicInput', '4');">
+			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '1');">Add a text input </button>
+			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '2');">Add a checkbox input</button>
+			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '3');">Add a radio button input</button>
+			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '4');">Add a dropdown option</button>
+			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '5');">Add a Date field option</button>
+			<br>
 			<br>
 		
-		
 	</div>
+</div>
 <br>
 &nbsp;
 
@@ -55,10 +59,20 @@ ORDER BY id DESC
 
 <input type="hidden" id="responseCounter" name="responseCounter" value=""/>
 
-<input type="submit" onClick= "submit_form()" value="Submit" ;">&nbsp;<input type="Reset" value="Clear Form">
+<input type="hidden" id="randId" name="randId" value=""/>
 
+<button type="submit" class="btn btn-primary btn-sm" onClick= "submit_form()" ;"> Submit </button>&nbsp;<button class="btn btn-danger btn-sm" type="Reset"> Clear Form </button>
 
-</form> 
+<div name="footerTry" id="footerTry">
+  
+  <img style="height: 50px;display: block;margin: auto;" src="../assets/img/footer.png">
+  
+  </div> 
+
+</form>
+ 
+</body>
+  
   
 <cfif not url.isAJAX>
 	<rde:header mode="end" page="index" import="../">

@@ -1,7 +1,7 @@
 <cfimport prefix="rde" taglib="../tags/">
 
 <cfparam name="url.isAJAX" default="false">
-<cfif isDefined("URL.surveyid")>
+<cfif isDefined("URL.surveykey")>
 <cfelse>
 <cflocation url="selectsurvey.cfm">
 </cfif>
@@ -35,19 +35,19 @@ input[type=radio] { height: 34px }
 </style>
 
 <cfscript>
-	function selectsurvey(surveyname){
+	function selectsurvey(surveykey){
 	var qryStr = "
-            SELECT Survey.Name, Question.Question, Question.id, Type.Type
+            SELECT Survey.Name, Survey.Description, Survey.surveyKey, Question.Question, Question.id, Type.Type
 			FROM Survey
 			
 			LEFT JOIN Question ON Survey.id = Question.Survey_id
 			LEFT JOIN Type ON Question.Type_id = Type.id
-			WHERE Survey.Name = ( :surveyname )
+			WHERE Survey.surveyKey = ( :surveykey )
 			";
 	        q = New Query();
 	        q.setDatasource(application.dataDSN);
 	        q.setSQL(qryStr);
-	        q.addParam(name="surveyname", value=surveyname, cfsqltype="cf_sql_varchar");
+	        q.addParam(name="surveykey", value=surveykey, cfsqltype="cf_sql_varchar");
 	        qSurvey = q.execute().getResult();
 	 }
 	 
@@ -56,7 +56,9 @@ input[type=radio] { height: 34px }
 <cfscript>
 	function showrow(query) {
 		WriteOutput('<div class="page-header"><h1>Survey: ' & query[ "name" ][1] & "</h1></div>");
-		WriteOutput('<div class="jumbotron"><form class="form-horizontal questions" ><fieldset>');
+		WriteOutput('<div class="jumbotron"><form class="form-horizontal questions" action="submitSurvey.cfm" method="POST"><fieldset>
+		
+		');
 		
 		
 		for (intRow = 1 ; intRow LTE query.RecordCount ; intRow = (intRow + 1)){
@@ -66,9 +68,9 @@ input[type=radio] { height: 34px }
 			if(query[ "type" ][ intRow ] == "textbox"){
 				WriteOutput('
 				<div class="form-group">
-  				<label class="form-label" for="textinput"> ' & query[ "question" ][ intRow ] & '</label>
+  				<label class="form-label" for="' & query[ "id" ][ intRow ] & '"> ' & query[ "question" ][ intRow ] & '</label>
   				<div class="forms">
-   				 <input id="textinput" name="textinput" type="text" placeholder="Answer here" class="input-xlarge">
+   				 <input id="' & query[ "id" ][ intRow ] & '" name="' & query[ "id" ][ intRow ] & '" type="text" placeholder="Answer here" class="input-xlarge">
  				</div>
 				</div>
 				');
@@ -89,8 +91,8 @@ input[type=radio] { height: 34px }
 				  <label class="form-label" for="radios">' & query[ "question" ][ intRow ] & '</label>
 				  <div class="forms">');
 				  for (intoptionRow = 1 ; intoptionRow LTE options.RecordCount ; intoptionRow = (intoptionRow + 1)){
-				    WriteOutput('<label class="radio" for="radios-' & (intoptionRow - 1) & '">
-				      <input type="radio" name="radios" id="radios-' & (intoptionRow - 1) & '" value="' & options[ "Option_text" ][ intoptionRow ] & '">
+				    WriteOutput('<label class="radio" for="' & query[ "id" ][ intRow ] & '-' & (intoptionRow - 1) & '">
+				      <input type="radio" name="' & query[ "id" ][ intRow ] & '" id="' & query[ "id" ][ intRow ] & '-' & (intoptionRow - 1) & '" value="' & options[ "Option_text" ][ intoptionRow ] & '">
 				      ' & options[ "Option_text" ][ intoptionRow ] & '
 				    </label>');
 				    
@@ -116,8 +118,8 @@ input[type=radio] { height: 34px }
 				  <label class="form-label" for="checkboxes">' & query[ "question" ][ intRow ] & '</label>
 				  <div class="forms">');
 				  for (intoptionRow = 1 ; intoptionRow LTE options.RecordCount ; intoptionRow = (intoptionRow + 1)){
-				    WriteOutput('<label class="checkbox" for="checkboxes-' & (intoptionRow - 1) & '">
-				      <input type="checkbox" name="checkboxes" id="checkboxes-' & (intoptionRow - 1) & '" value="' & options[ "Option_text" ][ intoptionRow ] & '">
+				    WriteOutput('<label class="checkbox" for="' & query[ "id" ][ intRow ] & '-' & (intoptionRow - 1) & '">
+				      <input type="checkbox" name="' & query[ "id" ][ intRow ] & '" id="' & query[ "id" ][ intRow ] & '-' & (intoptionRow - 1) & '" value="' & options[ "Option_text" ][ intoptionRow ] & '">
 				      ' & options[ "Option_text" ][ intoptionRow ] & '
 				    </label>');
 				    
@@ -140,9 +142,9 @@ input[type=radio] { height: 34px }
 		        options = q.execute().getResult();
 				WriteOutput('
 				<div class="form-group">
-				  <label class="form-label" for="selectbasic">' & query[ "question" ][ intRow ] & '</label>
+				  <label class="form-label" for="' & query[ "id" ][ intRow ] & '">' & query[ "question" ][ intRow ] & '</label>
 				  <div class="forms">
-				    <select id="selectbasic" name="selectbasic" class="input-xlarge">');
+				    <select id="' & query[ "id" ][ intRow ] & '" name="' & query[ "id" ][ intRow ] & '" class="input-xlarge">');
 				  for (intoptionRow = 1 ; intoptionRow LTE options.RecordCount ; intoptionRow = (intoptionRow + 1)){
 				    WriteOutput('<option>' & options[ "Option_text" ][ intoptionRow ] & '</option>');
 				   }
@@ -158,23 +160,28 @@ input[type=radio] { height: 34px }
 			
 			
 		}
+		WriteOutput('<input type="hidden" name="surveykey" value="' & query[ "surveyKey" ][1] & '">');
 	}
 
 	
 </cfscript>
-<cfoutput>#selectsurvey(URL.surveyid)#</cfoutput>
+<cfoutput>#selectsurvey(URL.surveykey)#</cfoutput>
 
 
-
+<div>
 <cfoutput>
 	#showrow(qSurvey)#
 </cfoutput>
+
+</div>
+
+<button type="button" id="prev" role="button" class="btn btn-primary btn-lg">Prev</button>
+<button type="button" id="next" role="button" class="btn btn-primary btn-lg">Next</button>
+<button type="submit" id="submit" role="button" class="btn btn-primary btn-lg">Submit</button>
+
 </fieldset>
 </form>
 
-<button id="prev" role="button" class="btn btn-primary btn-lg">Prev</button>
-<button id="next" role="button" class="btn btn-primary btn-lg">Next</button>
-<button id="submit" role="button" class="btn btn-primary btn-lg">Submit</button>
 </div>
 <hr class="boldhr">
 <script src="takesurvey.js" defer="true"></script>

@@ -68,14 +68,9 @@
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
       <li <cfif attributes.page eq "index">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>index.cfm">Home Page</a></li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Survey Builder <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li <cfif attributes.page eq "builder">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>builder/surveyMake.cfm">Build New Survey</a></li>
-          <li><a href="#">Edit Survey</a></li>
-        </ul>
-      </li>
-	  <li <cfif attributes.page eq "admin">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>admin.cfm">Survey List</a></li>
+
+	  <li <cfif attributes.page eq "builder">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>builder/surveyMake.cfm">Survey Builder</a></li>
+	  <li <cfif attributes.page eq "admin">class="active"</cfif>><a href="<cfoutput>#attributes.import#</cfoutput>admin.cfm">Survey Admin</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
     	

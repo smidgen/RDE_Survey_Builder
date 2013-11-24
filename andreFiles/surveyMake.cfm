@@ -12,7 +12,7 @@
 <script src="addInput.js" language="Javascript" type="text/javascript"></script>
 
 
-<cfquery name="getSurveyid" datasource="ANDRE-LAPTOPSQLEXPRESS3">
+<cfquery name="getSurveyid" datasource="#application.dataDSN#">
 
 SELECT TOP 1 *
 FROM dbo.Survey
