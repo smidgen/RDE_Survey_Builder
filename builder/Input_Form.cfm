@@ -5,7 +5,7 @@
 <cfif not url.isAJAX>
 	<rde:header mode="start" page="builder" import="../">
 </cfif>
-<rde:security>
+<rde:security import="../">
 
 
 <html>

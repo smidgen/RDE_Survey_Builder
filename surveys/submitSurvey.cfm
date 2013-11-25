@@ -71,4 +71,4 @@
 	 }
 </cfscript>
 
-<cflocation url="../surveys/selectsurvey.cfm">
+<cflocation url="../surveys/selectsurvey.cfm?complete=true">

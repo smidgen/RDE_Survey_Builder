@@ -30,6 +30,8 @@
 	}
 </style>
 
+
+
 <cfscript>
 	function selectform(){
 				var qryStr = "
@@ -77,6 +79,12 @@
 				
 </cfscript>
 <cfoutput>#selectform()#</cfoutput>
+
+
+
 <cfif not url.isAJAX>
 	<rde:header mode="end" page="takesurvey" import="../">
+</cfif>
+<cfif isDefined("URL.complete") and URL.complete eq "true">
+	<script>alert('Successfully Taken Survey')</script>
 </cfif>

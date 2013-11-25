@@ -77,3 +77,4 @@ ORDER BY id DESC
 <cfif not url.isAJAX>
 	<rde:header mode="end" page="index" import="../">
 </cfif>
+
