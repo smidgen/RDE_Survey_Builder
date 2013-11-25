@@ -8,12 +8,11 @@
 	
 	<cffunction name="OnApplicationStart" output="false">
 		
-		<cfset application.pageroot = "http://localhost:8500/projects/RDE/">
-		<cfset application.dataDSN = "MSSQL">
+		<cfset application.pageroot = "https://e2dev.rde.org/Developers/Nolan/NJITCapstone2013F/">
+		<cfset application.dataDSN = "CapstoneNJITFall2013_data">
+	</cffunction>
+
+	<cffunction name="OnRequestStart" output="false">
 		<cfsetting showdebugoutput="false" />
 	</cffunction>
-	
-
-
 </cfcomponent>
-
