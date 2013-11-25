@@ -1,4 +1,4 @@
-﻿<cfimport prefix="rde" taglib="tags/">
+<cfimport prefix="rde" taglib="tags/">
 
 <cfparam name="url.isAJAX" default="false">
 
@@ -18,21 +18,14 @@
 <div class="page-header">
   <h1>Surveys</h1>
 </div>
-<cfscript>
-	function showlist(){
-				var qryStr = "
-		            SELECT *
-					FROM Survey
-					
-					";
-		        q = New Query();
-		        q.setDatasource(application.dataDSN);
-		        q.setSQL(qryStr);
-		        
-		        surveys = q.execute().getResult();
-				
-					
-				
+
+<cffunction name="showlist">
+
+	<cfquery name="surveys" datasource="#application.dataDSN#">
+		SELECT *
+		FROM Survey
+	</cfquery>
+	<cfscript>
 				 	for (row = 1 ; row LTE surveys.RecordCount ; row = (row + 1)){
 				 		WriteOutput('<tr>');
 				  		WriteOutput('<td>' & surveys[ "Name" ][ row ] & '</td>');
@@ -43,11 +36,8 @@
 				   		WriteOutput('<td class="danger tablebutton"><a href="' & application.pageroot & 'surveys/deletesurvey.cfm?surveyid=' & surveys[ "id" ][ row ] & '">Delete</a></td>');		    
 						WriteOutput('</tr>');
 					}
-					
-					
-			}
-				
-</cfscript>
+	</cfscript>
+</cffunction>
 
 
 <div class="table-responsive">
