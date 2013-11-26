@@ -137,7 +137,7 @@ function addAnother(divId){
 	olddiv.insertBefore(newelement , oldelement);
 	olddiv.insertBefore(newtext, oldelement);
 	olddiv.insertBefore(br , oldelement);
-	olddiv.insert(br);
+	//olddiv.insert(br);
 	
 	responseCounter++;
 	}
