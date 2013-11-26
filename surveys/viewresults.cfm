@@ -1,4 +1,4 @@
-﻿<cfimport prefix="rde" taglib="../tags/">
+<cfimport prefix="rde" taglib="../tags/">
 
 <cfparam name="url.isAJAX" default="false">
 
@@ -7,23 +7,20 @@
 </cfif>
 
 <rde:security import="../">
-	
-	<cfscript>
-	function results(surveyid){
-	var qryStr = '
-            SELECT Survey_Taken.*, Response.Question_id, Response.Survey_Taken_id, Response.User_response, Question.Question FROM Survey_Taken
-            LEFT JOIN Response
-			ON Survey_Taken.id = Response.Survey_Taken_id
-			LEFT JOIN Question
-			ON Response.Question_id = Question.id
-			WHERE Survey_Taken.surveyKey = ( :surveyid )
-			';
-	        q = New Query();
-	        q.setDatasource(application.dataDSN);
-	        q.setSQL(qryStr);
-	        q.addParam(name="surveyid", value=surveyid, cfsqltype="cf_sql_varchar");
-	        qResponses = q.execute().getResult();
-	        
+
+	<cffunction name="results">
+		<cfargument name="surveyid">
+		<cfquery name="qResponses" datasource="#application.dataDSN#">
+            SELECT Survey_Taken.*, Response.Question_id, Response.Survey_Taken_id, Response.User_response, Question.Question
+			FROM Survey_Taken
+	            LEFT JOIN Response
+					ON Survey_Taken.id = Response.Survey_Taken_id
+				LEFT JOIN Question
+					ON Response.Question_id = Question.id
+			WHERE Survey_Taken.surveyKey = <cfqueryparam value="#surveyid#" cfsqltype="cf_sql_varchar">
+		</cfquery>
+		<cfscript>
+
 	        		for (row = 1 ; row LTE qResponses.RecordCount ; row = (row + 1)){
 				 		WriteOutput('<tr>');
 				  		WriteOutput('<td>' & qResponses[ "Ip_address" ][ row ] & '</td>');
@@ -33,11 +30,9 @@
 						WriteOutput('</tr>');
 					}
 
-	 }
-	 
-	 
-	</cfscript>
-	
+		</cfscript>
+	</cffunction>
+
 <div class="table-responsive">
   <table class="table table-bordered">
     <tr>
@@ -49,7 +44,7 @@
 	<cfoutput>#results(URL.surveykey)#</cfoutput>
   </table>
 </div>
-	
+
 <cfif not url.isAJAX>
 	<rde:header mode="end" page="viewresults" import="../" >
 </cfif>
