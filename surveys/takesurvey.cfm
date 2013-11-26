@@ -35,36 +35,30 @@ input[type=radio] { height: 34px }
 </style>
 
 
-<cfscript>
-	function selectsurvey(surveykey){
-	var qryStr = "
-            SELECT Survey.Name, Survey.Description, Survey.surveyKey, Question.Question, Question.id, Type.Type
-			FROM Survey
-			
-			LEFT JOIN Question ON Survey.id = Question.Survey_id
-			LEFT JOIN Type ON Question.Type_id = Type.id
-			WHERE Survey.surveyKey = ( :surveykey )
-			";
-	        q = New Query();
-	        q.setDatasource(application.dataDSN);
-	        q.setSQL(qryStr);
-	        q.addParam(name="surveykey", value=surveykey, cfsqltype="cf_sql_varchar");
-	        qSurvey = q.execute().getResult();
-	 }
-	 
-</cfscript>
+<cffunction name="selectsurvey">
+	<cfargument name="surveykey">
+	<cfquery name="qSurvey" datasource="#application.dataDSN#">
+		SELECT Survey.Name, Survey.Description, Survey.surveyKey, Question.Question, Question.id, Type.Type
+		FROM Survey
+		LEFT JOIN Question ON Survey.id = Question.Survey_id
+		LEFT JOIN Type ON Question.Type_id = Type.id
+		WHERE Survey.surveyKey = <cfqueryparam value="#arguments.surveykey#" cfsqltype="cf_sql_varchar">
+	</cfquery>
+	<cfreturn qSurvey>
+</cffunction>
 
-<cfscript>
-	function showrow(query) {
+
+<cffunction name="showrow">
+	<cfargument name="query">
+	<cfscript>
 		WriteOutput('<div class="page-header"><h1>Survey: ' & query[ "name" ][1] & "</h1></div>");
 		WriteOutput('<div class="jumbotron"><form class="form-horizontal questions" action="submitSurvey.cfm" method="POST"><fieldset>
-		
+
 		');
-		
-		
-		for (intRow = 1 ; intRow LTE query.RecordCount ; intRow = (intRow + 1)){
- 
-		
+	</cfscript>
+
+	<cfloop from="1" to="#query.RecordCount#" index="intRow">
+		<cfscript>
 			//WriteOutput("debug: " & query[ "id" ][ intRow ]);
 			if(query[ "type" ][ intRow ] == "textbox"){
 				WriteOutput('
@@ -76,17 +70,15 @@ input[type=radio] { height: 34px }
 				</div>
 				');
 			}
-			if(query[ "type" ][ intRow ] == "radio"){
-				var qryStr = "
-		            SELECT Option_text
-					FROM Options
-					WHERE Options.Question_id = ( :id )
-					";
-		        q = New Query();
-		        q.setDatasource(application.dataDSN);
-		        q.setSQL(qryStr);
-		        q.addParam(name="id", value=query[ "id" ][ intRow ], cfsqltype="cf_sql_integer");
-		        options = q.execute().getResult();
+		</cfscript>
+		<cfif query[ "type" ][ intRow ] eq "radio">
+			<cfquery name="options" datasource="#application.dataDSN#">
+				SELECT Option_text
+				FROM Options
+				WHERE Options.Question_id = <cfqueryparam value="#query.id[intRow]#" cfsqltype="cf_sql_integer">
+			</cfquery>
+
+			<cfscript>
 				WriteOutput('
 				<div class="form-group">
 				  <label class="form-label" for="radios">' & query[ "question" ][ intRow ] & '</label>
@@ -96,24 +88,21 @@ input[type=radio] { height: 34px }
 				      <input type="radio" name="' & query[ "id" ][ intRow ] & '" id="' & query[ "id" ][ intRow ] & '-' & (intoptionRow - 1) & '" value="' & options[ "Option_text" ][ intoptionRow ] & '">
 				      ' & options[ "Option_text" ][ intoptionRow ] & '
 				    </label>');
-				    
+
 					}
 				WriteOutput(' </div>
 				</div>
 				');
-				
-			}
-			if(query[ "type" ][ intRow ] == "checkbox"){
-				var qryStr = "
-		            SELECT Option_text
-					FROM Options
-					WHERE Options.Question_id = ( :id )
-					";
-		        q = New Query();
-		        q.setDatasource(application.dataDSN);
-		        q.setSQL(qryStr);
-		        q.addParam(name="id", value=query[ "id" ][ intRow ], cfsqltype="cf_sql_integer");
-		        options = q.execute().getResult();
+			</cfscript>
+		</cfif>
+
+		<cfif query[ "type" ][ intRow ] eq "checkbox">
+			<cfquery name="options" datasource="#application.dataDSN#">
+				SELECT Option_text
+				FROM Options
+				WHERE Options.Question_id = <cfqueryparam value="#query.id[intRow]#" cfsqltype="cf_sql_integer">
+			</cfquery>
+			<cfscript>
 				WriteOutput('
 				<div class="form-group">
 				  <label class="form-label" for="checkboxes">' & query[ "question" ][ intRow ] & '</label>
@@ -123,24 +112,20 @@ input[type=radio] { height: 34px }
 				      <input type="checkbox" name="' & query[ "id" ][ intRow ] & '" id="' & query[ "id" ][ intRow ] & '-' & (intoptionRow - 1) & '" value="' & options[ "Option_text" ][ intoptionRow ] & '">
 				      ' & options[ "Option_text" ][ intoptionRow ] & '
 				    </label>');
-				    
+
 					}
 				WriteOutput(' </div>
 				</div>
 				');
-				
-			}
-			if(query[ "type" ][ intRow ] == "dropdown"){
-				var qryStr = "
+			</cfscript>
+		</cfif>
+		<cfif query[ "type" ][ intRow ] eq "dropdown">
+			<cfquery name="options" datasource="#application.dataDSN#">
 		            SELECT Option_text
 					FROM Options
-					WHERE Options.Question_id = ( :id )
-					";
-		        q = New Query();
-		        q.setDatasource(application.dataDSN);
-		        q.setSQL(qryStr);
-		        q.addParam(name="id", value=query[ "id" ][ intRow ], cfsqltype="cf_sql_integer");
-		        options = q.execute().getResult();
+					WHERE Options.Question_id = <cfqueryparam value="#query.id[intRow]#" cfsqltype="cf_sql_integer">
+			</cfquery>
+			<cfscript>
 				WriteOutput('
 				<div class="form-group">
 				  <label class="form-label" for="' & query[ "id" ][ intRow ] & '">' & query[ "question" ][ intRow ] & '</label>
@@ -149,25 +134,22 @@ input[type=radio] { height: 34px }
 				  for (intoptionRow = 1 ; intoptionRow LTE options.RecordCount ; intoptionRow = (intoptionRow + 1)){
 				    WriteOutput('<option>' & options[ "Option_text" ][ intoptionRow ] & '</option>');
 				   }
-				WriteOutput(' 
+				WriteOutput('
 					</select>
 				  </div>
 				</div>
 				');
-				
-			}
-			
-			
-			
-			
-		}
+			</cfscript>
+		</cfif>
+
+	</cfloop>
+	<cfscript>
 		WriteOutput('<input type="hidden" name="surveykey" value="' & query[ "surveyKey" ][1] & '">');
-	}
+	</cfscript>
+</cffunction>
 
-	
-</cfscript>
-<cfoutput>#selectsurvey(URL.surveykey)#</cfoutput>
 
+<cfset qSurvey = selectsurvey(URL.surveykey)>
 
 <div>
 <cfoutput>
