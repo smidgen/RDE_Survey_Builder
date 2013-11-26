@@ -65,3 +65,15 @@ CREATE TABLE [dbo].[Options](
 	[Option_text] [varchar](50) NOT NULL
 ) ON [PRIMARY]
 GO
+
+INSERT INTO dbo.Users (Username, password)
+VALUES ('admin', 'pass')
+GO
+
+INSERT INTO dbo.Type (Type)
+VALUES	('text'),
+		('checkbox'),
+		('radio'),
+		('dropdown'),
+		('date')
+GO
