@@ -28,16 +28,16 @@ CREATE TABLE [dbo].[Type](
 GO
 
 CREATE TABLE [dbo].[Survey_Taken](
-	[Date] [nchar](30) NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [varchar](30) NULL,
 	[Ip_address] [varchar](30) NULL,
-	[surveyKey] [varchar](30) NOT NULL,
-	[id] [int] IDENTITY(1,1) NOT NULL
+	[surveyKey] [varchar](30) NOT NULL
 ) ON [PRIMARY]
 GO
 
 CREATE TABLE [dbo].[Survey](
 	[id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	[Name] [nvarchar](max) NOT NULL,
+	[Name] [varchar](max) NOT NULL,
 	[Description] [varchar](50) NULL,
 	[surveyKey] [varchar](30) NULL
 ) ON [PRIMARY]
@@ -71,7 +71,7 @@ VALUES ('admin', 'pass')
 GO
 
 INSERT INTO dbo.Type (Type)
-VALUES	('text'),
+VALUES	('textbox'),
 		('checkbox'),
 		('radio'),
 		('dropdown'),
