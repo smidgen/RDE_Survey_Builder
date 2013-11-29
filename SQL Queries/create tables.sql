@@ -1,117 +1,79 @@
-USE [RDE_DB] /*<----- Change that to whatever your coldfusion datasource is*/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND type in (N'U'))
+DROP TABLE [dbo].[Users]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Type]') AND type in (N'U'))
+DROP TABLE [dbo].[Type]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Survey_Taken]') AND type in (N'U'))
+DROP TABLE [dbo].[Survey_Taken]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Survey]') AND type in (N'U'))
+DROP TABLE [dbo].[Survey]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Response]') AND type in (N'U'))
+DROP TABLE [dbo].[Response]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Question]') AND type in (N'U'))
+DROP TABLE [dbo].[Question]
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Options]') AND type in (N'U'))
+DROP TABLE [dbo].[Options]
+GO
 
-GO
-/****** Object:  Table [dbo].[Users]    Script Date: 11/24/2013 19:08:26 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE TABLE [dbo].[Users](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[Username] [nchar](10) NOT NULL,
-	[password] [nvarchar](50) NOT NULL,
- CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
+	[id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[Username] [varchar](10) NOT NULL,
+	[password] [varchar](50) NOT NULL
+)
 GO
-/****** Object:  Table [dbo].[Type]    Script Date: 11/24/2013 19:08:26 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[Type](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[Type] [nvarchar](50) NULL,
- CONSTRAINT [PK_Type] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	[id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[Type] [varchar](50) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Survey_Taken]    Script Date: 11/24/2013 19:08:26 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[Survey_Taken](
-	[Date] [nchar](30) NULL,
-	[Ip_address] [nchar](30) NULL,
-	[surveyKey] [nchar](30) NOT NULL,
-	[id] [int] IDENTITY(1,1) NOT NULL
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Date] [varchar](30) NULL,
+	[Ip_address] [varchar](30) NULL,
+	[surveyKey] [varchar](30) NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Survey]    Script Date: 11/24/2013 19:08:26 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[Survey](
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[Name] [nvarchar](max) NOT NULL,
-	[Description] [nchar](50) NULL,
-	[surveyKey] [nchar](30) NULL,
- CONSTRAINT [PK_Survey_1] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	[id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[Name] [varchar](max) NOT NULL,
+	[Description] [varchar](50) NULL,
+	[surveyKey] [varchar](30) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Response]    Script Date: 11/24/2013 19:08:26 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[Response](
-	[User_response] [nvarchar](max) NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[User_response] [varchar](max) NOT NULL,
 	[Survey_Taken_id] [int] NOT NULL,
-	[id] [int] IDENTITY(1,1) NOT NULL,
-	[Question_id] [nchar](10) NULL,
- CONSTRAINT [PK_Response_1] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	[Question_id] [varchar](10) NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Question]    Script Date: 11/24/2013 19:08:26 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 CREATE TABLE [dbo].[Question](
-	[Question] [nvarchar](max) NULL,
-	[id] [int] IDENTITY(1,1) NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	[Question] [varchar](max) NULL,
 	[Survey_id] [int] NOT NULL,
-	[Type_id] [smallint] NULL,
- CONSTRAINT [PK_Question_1] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	[Type_id] [smallint] NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Options]    Script Date: 11/24/2013 19:08:26 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
+
 CREATE TABLE [dbo].[Options](
-	[id] [int] IDENTITY(1,1) NOT NULL,
+	[id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[Question_id] [int] NOT NULL,
-	[Option_text] [varchar](50) NOT NULL,
- CONSTRAINT [PK_Option] PRIMARY KEY CLUSTERED 
-(
-	[id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+	[Option_text] [varchar](50) NOT NULL
 ) ON [PRIMARY]
 GO
-SET ANSI_PADDING OFF
+
+INSERT INTO dbo.Users (Username, password)
+VALUES ('admin', 'pass')
 GO
-/****** Object:  ForeignKey [FK_Question_Question]    Script Date: 11/24/2013 19:08:26 ******/
-ALTER TABLE [dbo].[Question]  WITH CHECK ADD  CONSTRAINT [FK_Question_Question] FOREIGN KEY([id])
-REFERENCES [dbo].[Question] ([id])
-GO
-ALTER TABLE [dbo].[Question] CHECK CONSTRAINT [FK_Question_Question]
+
+INSERT INTO dbo.Type (Type)
+VALUES	('textbox'),
+		('checkbox'),
+		('radio'),
+		('dropdown'),
+		('date')
 GO

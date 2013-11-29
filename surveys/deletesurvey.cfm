@@ -1,4 +1,4 @@
-﻿<cfimport prefix="rde" taglib="../tags/">
+<cfimport prefix="rde" taglib="../tags/">
 
 <cfparam name="url.isAJAX" default="false">
 
@@ -8,20 +8,13 @@
 
 <rde:security>
 	
-	<cfscript>
-	function deletesurvey(surveyid){
-	var qryStr = '
+	<cffunction name="deletesurvey">
+		<cfargument name="surveyid">
+		<cfquery datasource="#application.dataDSN#">
             DELETE FROM Survey
-            WHERE Name = ( :surveyid );
-			';
-	        q = New Query();
-	        q.setDatasource(application.dataDSN);
-	        q.setSQL(qryStr);
-	        q.addParam(name="surveyid", value=surveyid, cfsqltype="cf_sql_varchar");
-	        q.execute();
-	 }
-	 
-	</cfscript>
+            WHERE id = <cfqueryparam value="#surveyid#" cfsqltype="cf_sql_varchar">
+		</cfquery>
+	</cffunction>
 	<cfoutput>#deletesurvey(URL.surveyid)#</cfoutput>
 	<cflocation url="../admin.cfm">
 	

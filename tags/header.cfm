@@ -98,7 +98,7 @@
 	</footer>
 
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="//code.jquery.com/jquery-latest.js"></script>
 <script src="<cfoutput>#attributes.import#</cfoutput>assets/js/bootstrap.min.js"></script>
 </body>
 </html>

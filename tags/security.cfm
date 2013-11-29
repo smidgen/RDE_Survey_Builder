@@ -1,4 +1,4 @@
-﻿<cfparam name="attributes.restricted" default="true">
+<cfparam name="attributes.restricted" default="true">
 <cfparam name="attributes.import" default="./">
 
 <cfif #attributes.restricted# EQ "true">
@@ -14,7 +14,7 @@
 	</footer>
  </div>
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="//code.jquery.com/jquery-latest.js"></script>
 <script src="../assets/js/bootstrap.min.js"></script>
 </body>
 </html>
