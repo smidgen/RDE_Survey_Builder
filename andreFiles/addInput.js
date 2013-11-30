@@ -54,12 +54,12 @@ var randIndex = Math.floor(Math.random() * 26)
 function addInput(divName, typeDig){
      
           var newdiv = document.createElement('div');
-		  
+		  newdiv.setAttribute("id", typeDig);
 		 switch(typeDig){
 			case '1':
-			newdiv.innerHTML = "<div id='"+ (counter) + "'> Question " 
+			newdiv.innerHTML = "Question " 
 			+ (counter) + "<br><input type='text' name='Question"+counter+"_1'> " 
-			+ "<br><br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ");> Delete a Text Field</button></div> ";
+			+ "<br><br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ");> Delete a Text Field</button> ";
 			document.getElementById(divName).appendChild(newdiv);
 			
 			
@@ -67,9 +67,9 @@ function addInput(divName, typeDig){
 			break;
 			
 			case '2':
-			newdiv.innerHTML = "<div id='"+ (counter) + "'> Question " 
+			newdiv.innerHTML = "Question " 
 			+ (counter) + ": <br><input type='text' id='Question"+counter+"' name='Question"+counter+"_2'><br><br><input id='type"+counter+"' type='checkbox' name='Response"+(counter)+"_"+(responseCounter)+"'> <input type='text' name='Response"+(counter)+"_"+(responseCounter)+"'>" 
-			+ "<br> <button type='button' id='check"+counter+"'  class='btn btn-primary btn-sm'  onClick= addAnother("+counter+")>Add another checkbox input </button> <br><br> <button class='btn btn-danger btn-sm' type='button' onClick=deleteInput(" + (counter) + ")>Delete a Text Field</button> </div> <br> ";
+			+ "<br> <button type='button' id='check"+counter+"'  class='btn btn-primary btn-sm'  onClick= addAnother("+counter+")>Add another checkbox input </button> <br><br> <button class='btn btn-danger btn-sm' type='button' onClick=deleteInput(" + (counter) + ")>Delete a Checkbox Field</button> <br> ";
 			document.getElementById(divName).appendChild(newdiv);
 			
 			responseCounter++;
@@ -77,9 +77,9 @@ function addInput(divName, typeDig){
 			break;
 			
 			case '3':
-			newdiv.innerHTML = "<div id='"+ (counter) + "'> Question " 
+			newdiv.innerHTML = "Question " 
 			+ (counter) + ":<br><input type='text' name='Question"+counter+"_3'><br><br><input type='radio' id='type"+counter+"' name='Response"+(counter)+"_"+(responseCounter)+"'> <input type='text' name='Response"+(counter)+"_"+(responseCounter)+"'>"  
-			+ "<br> <button type='button' id='check"+counter+"'  class='btn btn-primary btn-sm' onClick=addAnother("+counter+")>Add another radio button input</button> <br><br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ")>Delete a Text Field</button></div><br> ";
+			+ "<br> <button type='button' id='check"+counter+"'  class='btn btn-primary btn-sm' onClick=addAnother("+counter+")>Add another radio button input</button> <br><br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ")>Delete a Radio Button Field</button><br> ";
 			document.getElementById(divName).appendChild(newdiv);
 			
 			responseCounter++;
@@ -87,9 +87,9 @@ function addInput(divName, typeDig){
 			break;
 			
 			case '4':
-			newdiv.innerHTML = "<div id='"+ (counter) + "'> Question " 
+			newdiv.innerHTML = " Question " 
 			+ (counter) + ":<br><input type='text' name='Question"+counter+"_4'><br><br><input id='type"+counter+"' type='text' name='Response"+(counter)+"_"+(responseCounter)+"'>"  
-			+ "<br> <button type='button' id='check"+counter+"'  class='btn btn-primary btn-sm' onClick=addAnother("+counter+")>Add another option for dropdown</button> <br><br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ")>Delete a Text Field</button></div><br> ";
+			+ "<br> <button type='button' id='check"+counter+"'  class='btn btn-primary btn-sm' onClick=addAnother("+counter+")>Add another option for dropdown</button> <br><br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ")>Delete a Dropdown Field</button><br> ";
 			document.getElementById(divName).appendChild(newdiv);
 			
 			responseCounter++;
@@ -97,9 +97,9 @@ function addInput(divName, typeDig){
 			break;
 			
 			case '5':
-			newdiv.innerHTML = "<div id='"+ (counter) + "'> Question " 
+			newdiv.innerHTML = "Question " 
 			+ (counter) + "<br><input type='text' name='Question"+counter+"_5'> " 
-			+ "<br> <br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ");>Delete a Text Field</button></div><br> ";
+			+ "<br> <br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ");>Delete a Date Field</button><br> ";
 			document.getElementById(divName).appendChild(newdiv);
 			
 			counter++;

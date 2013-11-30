@@ -3,7 +3,7 @@
 <cfparam name="url.isAJAX" default="false">
 
 <cfif not url.isAJAX>
-	<rde:header mode="start" page="builder" import="../">
+	<rde:header_builder mode="start" page="builder" import="../">
 </cfif>
 <rde:security>
 	
@@ -12,7 +12,7 @@
 <script src="addInput.js" language="Javascript" type="text/javascript"></script>
 
 
-<cfquery name="getSurveyid" datasource="#application.dataDSN#">
+<cfquery name="getSurveyid" datasource="ANDRE-LAPTOPSQLEXPRESS3">
 
 SELECT TOP 1 *
 FROM dbo.Survey
@@ -33,7 +33,13 @@ ORDER BY id DESC
 	<br>
 	<br>
    Survey Name:
-    <input type="Text" name="Name" size="35" maxlength="50">
+   <br>
+    <input type="Text" class="input-small" name="Name" size="35" maxlength="50">
+	<br>
+	<br>
+	Survey Description:
+	<br>
+	<textarea type="Text" name="Description" size="35" maxlength="100"></textarea>
 	<br>
 	<br>
 <div id="wrapper" style="min-height:100%">	
@@ -42,6 +48,7 @@ ORDER BY id DESC
 			<br>
 			
 			Questions:
+			<br>
 			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '1');">Add a text input </button>
 			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '2');">Add a checkbox input</button>
 			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '3');">Add a radio button input</button>
@@ -63,17 +70,21 @@ ORDER BY id DESC
 
 <button type="submit" class="btn btn-primary btn-sm" onClick= "submit_form()" ;"> Submit </button>&nbsp;<button class="btn btn-danger btn-sm" type="Reset"> Clear Form </button>
 
-<div name="footerTry" id="footerTry">
-  
-  <img style="height: 50px;display: block;margin: auto;" src="../assets/img/footer.png">
-  
-  </div> 
-
 </form>
+ 
+
  
 </body>
   
-  
+
 <cfif not url.isAJAX>
-	<rde:header mode="end" page="index" import="../">
+	<rde:header_builder mode="end" page="index" import="../">
 </cfif>
+
+<div class ="container" style="min-height:20%; position:relative;" >
+<div name ="footerTry" id="footerTry">
+  
+  <img style="height: 50px;display: block;margin: auto; position:absolute; bottom:0;" src="../assets/img/footer.png">
+  
+   </div>
+  </div>
