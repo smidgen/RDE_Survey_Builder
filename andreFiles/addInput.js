@@ -54,12 +54,12 @@ var randIndex = Math.floor(Math.random() * 26)
 function addInput(divName, typeDig){
      
           var newdiv = document.createElement('div');
-		  newdiv.setAttribute("id", typeDig);
+		  newdiv.setAttribute("id", counter);
 		 switch(typeDig){
 			case '1':
-			newdiv.innerHTML = "Question " 
-			+ (counter) + "<br><input type='text' name='Question"+counter+"_1'> " 
-			+ "<br><br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ");> Delete a Text Field</button> ";
+			newdiv.innerHTML = "<br><br><div class='questionBorder' id='questionBorder"+counter+"'><h2>Question " 
+			+ (counter) + "</h2><br><input type='text' name='Question"+counter+"_1'> " 
+			+ "<br><br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ");> Delete a Text Field</button><br><br></div> ";
 			document.getElementById(divName).appendChild(newdiv);
 			
 			
@@ -67,9 +67,9 @@ function addInput(divName, typeDig){
 			break;
 			
 			case '2':
-			newdiv.innerHTML = "Question " 
-			+ (counter) + ": <br><input type='text' id='Question"+counter+"' name='Question"+counter+"_2'><br><br><input id='type"+counter+"' type='checkbox' name='Response"+(counter)+"_"+(responseCounter)+"'> <input type='text' name='Response"+(counter)+"_"+(responseCounter)+"'>" 
-			+ "<br> <button type='button' id='check"+counter+"'  class='btn btn-primary btn-sm'  onClick= addAnother("+counter+")>Add another checkbox input </button> <br><br> <button class='btn btn-danger btn-sm' type='button' onClick=deleteInput(" + (counter) + ")>Delete a Checkbox Field</button> <br> ";
+			newdiv.innerHTML = "<br><br><div class='questionBorder' id='questionBorder"+counter+"'> <h2>Question " 
+			+ (counter) + ":</h2> <br><input type='text' id='Question"+counter+"' name='Question"+counter+"_2'><br><br><h2>Options:</h2><br><input id='type"+counter+"' type='checkbox' name='Response"+(counter)+"_"+(responseCounter)+"'> <input type='text' name='Response"+(counter)+"_"+(responseCounter)+"'>" 
+			+ "<br> <br><button type='button' id='check"+counter+"'  class='btn btn-primary btn-sm'  onClick= addAnother("+counter+")>Add another checkbox input </button> <br><br> <button class='btn btn-danger btn-sm' type='button' onClick=deleteInput(" + (counter) + ")>Delete a Checkbox Field</button> <br><br></div> ";
 			document.getElementById(divName).appendChild(newdiv);
 			
 			responseCounter++;
@@ -77,9 +77,9 @@ function addInput(divName, typeDig){
 			break;
 			
 			case '3':
-			newdiv.innerHTML = "Question " 
-			+ (counter) + ":<br><input type='text' name='Question"+counter+"_3'><br><br><input type='radio' id='type"+counter+"' name='Response"+(counter)+"_"+(responseCounter)+"'> <input type='text' name='Response"+(counter)+"_"+(responseCounter)+"'>"  
-			+ "<br> <button type='button' id='check"+counter+"'  class='btn btn-primary btn-sm' onClick=addAnother("+counter+")>Add another radio button input</button> <br><br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ")>Delete a Radio Button Field</button><br> ";
+			newdiv.innerHTML = "<br><br><div class='questionBorder' id='questionBorder"+counter+"'><h2>Question " 
+			+ (counter) + ":</h2><br><input type='text' name='Question"+counter+"_3'><br><br><h2>Options:</h2><br><input type='radio' id='type"+counter+"' name='Response"+(counter)+"_"+(responseCounter)+"'> <input type='text' name='Response"+(counter)+"_"+(responseCounter)+"'>"  
+			+ "<br> <br><button type='button' id='check"+counter+"'  class='btn btn-primary btn-sm' onClick=addAnother("+counter+")>Add another radio button input</button> <br><br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ")>Delete a Radio Button Field</button><br><br></div> ";
 			document.getElementById(divName).appendChild(newdiv);
 			
 			responseCounter++;
@@ -87,9 +87,9 @@ function addInput(divName, typeDig){
 			break;
 			
 			case '4':
-			newdiv.innerHTML = " Question " 
-			+ (counter) + ":<br><input type='text' name='Question"+counter+"_4'><br><br><input id='type"+counter+"' type='text' name='Response"+(counter)+"_"+(responseCounter)+"'>"  
-			+ "<br> <button type='button' id='check"+counter+"'  class='btn btn-primary btn-sm' onClick=addAnother("+counter+")>Add another option for dropdown</button> <br><br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ")>Delete a Dropdown Field</button><br> ";
+			newdiv.innerHTML = "<br><br> <div class='questionBorder' id='questionBorder"+counter+"'><h2>Question " 
+			+ (counter) + ":</h2><br><input type='text' name='Question"+counter+"_4'><br><br><h2>Options:</h2><br><input id='type"+counter+"' type='text' name='Response"+(counter)+"_"+(responseCounter)+"'>"  
+			+ "<br> <br><button type='button' id='check"+counter+"'  class='btn btn-primary btn-sm' onClick=addAnother("+counter+")>Add another option for dropdown</button> <br><br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ")>Delete a Dropdown Field</button><br><br></div> ";
 			document.getElementById(divName).appendChild(newdiv);
 			
 			responseCounter++;
@@ -97,9 +97,9 @@ function addInput(divName, typeDig){
 			break;
 			
 			case '5':
-			newdiv.innerHTML = "Question " 
-			+ (counter) + "<br><input type='text' name='Question"+counter+"_5'> " 
-			+ "<br> <br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ");>Delete a Date Field</button><br> ";
+			newdiv.innerHTML = "<br><br><div class='questionBorder' id='questionBorder"+counter+"'><h2>Question " 
+			+ (counter) + "</h2><br><input type='text' name='Question"+counter+"_5'> " 
+			+ "<br> <br> <button type='button' class='btn btn-danger btn-sm' onClick=deleteInput(" + (counter) + ");>Delete a Date Field</button><br><br></div> ";
 			document.getElementById(divName).appendChild(newdiv);
 			
 			counter++;
@@ -113,8 +113,9 @@ function addAnother(divId){
 	var newtext = document.createElement('input');
 	var oldelement = document.getElementById('check'+divId+'');
 	var olddiv = document.getElementById(divId);
-	var br = document.createElement("br");
-	var typeDig = '2';
+	var br = document.createElement('br');
+	var br2 = document.createElement('br');
+	var divtest = document.getElementById('questionBorder'+divId+'');
 	
 	var test = document.getElementById('type'+divId+'');
 	
@@ -134,10 +135,10 @@ function addAnother(divId){
 	//document.getElementById(divId).appendChild(newelement);
 	//document.getElementById(divId).appendChild(newtext);
 	
-	olddiv.insertBefore(newelement , oldelement);
-	olddiv.insertBefore(newtext, oldelement);
-	olddiv.insertBefore(br , oldelement);
-	olddiv.insert(br);
+	divtest.insertBefore(newelement , oldelement);
+	divtest.insertBefore(newtext, oldelement);
+	divtest.insertBefore(br , oldelement);
+	divtest.insertBefore(br2, oldelement);
 	
 	responseCounter++;
 	}
@@ -154,10 +155,10 @@ function addAnother(divId){
 	//document.getElementById(divId).appendChild(newelement);
 	//document.getElementById(divId).appendChild(newtext);
 	
-	olddiv.insertBefore(newelement , oldelement);
-	olddiv.insertBefore(newtext, oldelement);
-	olddiv.insertBefore(br , oldelement);
-	
+	divtest.insertBefore(newelement , oldelement);
+	divtest.insertBefore(newtext, oldelement);
+	divtest.insertBefore(br , oldelement);
+	divtest.insertBefore(br2, oldelement);
 	responseCounter++;
 	}
 	
@@ -171,10 +172,10 @@ function addAnother(divId){
 	//document.getElementById(divId).appendChild(newelement);
 	//document.getElementById(divId).appendChild(newtext);
 	
-	olddiv.insertBefore(newelement , oldelement);
 	
-	olddiv.insertBefore(br , oldelement);
-	
+	divtest.insertBefore(newelement, oldelement);
+	divtest.insertBefore(br , oldelement);
+	divtest.insertBefore(br2, oldelement);
 	responseCounter++;
 	}
 	
@@ -186,13 +187,23 @@ function addAnother(divId){
 
 function deleteInput(num_input){
 
-	      var olddiv = document.getElementById(num_input);
+		  var parentdiv = document.getElementById("dynamicInput");		
+				
+	      var olddiv = document.getElementById(""+num_input+"");
+		   counter--;
+		  //var innerMost = document.getElementById("questionBorder");
 		  
-	      olddiv.parentNode.removeChild(olddiv);
+		  //olddiv.parentNode.removeChild(innerMost);
+		  
+	      //parentdiv.parentNode.removeChild(olddiv);
 		  
 		  
 		  
-		  counter--;
+			parentdiv.removeChild(olddiv);
+		
+		  
+		  
+		 
 		  
 		  
 }

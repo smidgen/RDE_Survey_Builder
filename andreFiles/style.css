@@ -17,8 +17,44 @@ width:70px;
 margin:0 auto;
 }
 
+#headerBorder{
+text-align:center;
+width:600px;
+border-bottom-width:1px;
+border-bottom-color:blue;
+border-bottom-style: solid;
+margin: 0 auto;
+}
 
+#headerBorder2{
+text-align:center;
+width:800px;
+border-bottom-width:1px;
+border-bottom-color:blue;
+border-bottom-style: solid;
+margin: 0 auto;
+}
 
+#headerBorder3{
+text-align:center;
+width:300px;
+border-bottom-width:1px;
+border-bottom-color:blue;
+border-bottom-style: solid;
+margin: 0 auto;
+}
+
+.questionBorder{
+border-width:1px;
+border-style:solid;
+border-color:black;
+width:500px;
+margin: 0 auto;
+}
+
+h1{
+font-size:70px;
+}
 
 .container2 {
 position: relative;

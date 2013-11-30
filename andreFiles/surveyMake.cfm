@@ -23,23 +23,27 @@ ORDER BY id DESC
 </head> 
  
 <body> 
-<h2>Survey Builder</h2> 
+<h1>Survey Builder</h1> 
 
-
+<br>
+<br>
+<br>
+<br>
 <form id="mainForm" action="Input_Form.cfm" method="post"> 
  
 
-    Survey ID: <cfoutput query="getSurveyid">#id#</cfoutput>
+  <div id="headerBorder"> <h2> Survey ID: <cfoutput query="getSurveyid">#id#</cfoutput> </h2> </div>
 	<br>
 	<br>
-   Survey Name:
+	
+  <div id="headerBorder"> <h2>Survey Name:
    <br>
-    <input type="Text" class="input-small" name="Name" size="35" maxlength="50">
+    <input type="Text" class="input-small" name="Name" size="35" maxlength="50"></h2> </div>
 	<br>
 	<br>
-	Survey Description:
+	<div id="headerBorder"> <h2>Survey Description:  
 	<br>
-	<textarea type="Text" name="Description" size="35" maxlength="100"></textarea>
+	<textarea type="Text" name="Description" size="35" maxlength="100"></textarea></h2> </div>
 	<br>
 	<br>
 <div id="wrapper" style="min-height:100%">	
@@ -47,7 +51,7 @@ ORDER BY id DESC
 		
 			<br>
 			
-			Questions:
+			 <div id="headerBorder2"><h2>Questions:</h2>
 			<br>
 			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '1');">Add a text input </button>
 			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '2');">Add a checkbox input</button>
@@ -56,7 +60,7 @@ ORDER BY id DESC
 			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '5');">Add a Date field option</button>
 			<br>
 			<br>
-		
+			</div>
 	</div>
 </div>
 <br>
