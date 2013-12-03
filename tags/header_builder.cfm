@@ -45,7 +45,7 @@
 </style>
 <!-- HTML5 shim for IE backwards compatibility -->
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
 
@@ -103,7 +103,7 @@
 	
 
 
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="//code.jquery.com/jquery-latest.js"></script>
 <script src="<cfoutput>#attributes.import#</cfoutput>assets/js/bootstrap.min.js"></script>
 </body>
 </html>
