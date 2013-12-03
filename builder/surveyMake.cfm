@@ -8,7 +8,7 @@
 <rde:security>
 	
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="http://localhost:8500/projects/RDE_Survey_Builder/assets/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="../assets/css/bootstrap-responsive.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="style.css" />
 
 <script src="addInput.js" language="Javascript" type="text/javascript"></script>
