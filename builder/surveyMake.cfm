@@ -3,10 +3,12 @@
 <cfparam name="url.isAJAX" default="false">
 
 <cfif not url.isAJAX>
-	<rde:header mode="start" page="builder" import="../">
+	<rde:header_builder mode="start" page="builder" import="../">
 </cfif>
 <rde:security>
 	
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="http://localhost:8500/projects/RDE_Survey_Builder/assets/css/bootstrap-responsive.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="style.css" />
 
 <script src="addInput.js" language="Javascript" type="text/javascript"></script>
@@ -23,25 +25,34 @@ ORDER BY id DESC
 </head> 
  
 <body> 
-<h2>Survey Builder</h2> 
+<h1>Survey Builder</h1> 
 
 
+<br>
+<br>
 <form id="mainForm" action="Input_Form.cfm" method="post"> 
  
 
-    Survey ID: <cfoutput query="getSurveyid">#id#</cfoutput>
+  <div class="jumbotron">  <h2> Survey ID: <cfoutput query="getSurveyid">#id#</cfoutput> </h2>  </div>
+	
+	
+  <div class="jumbotron"> <h2>Survey Name:
+   <br>
+    <input type="Text" class="form-control" name="Name" size="35" maxlength="50"></h2> </div>
+	
+	
+	<div class="jumbotron"> <h2>Survey Description:  
 	<br>
-	<br>
-   Survey Name:
-    <input type="Text" name="Name" size="35" maxlength="50">
-	<br>
+	<textarea type="Text" class="form-control" name="Description" size="35" maxlength="100"></textarea></h2> </div>
+	
 	<br>
 <div id="wrapper" style="min-height:100%">	
 	<div id="dynamicInput">
 		
 			<br>
 			
-			Questions:
+			 <div class="jumbotron"><h2>Questions:</h2>
+			<br>
 			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '1');">Add a text input </button>
 			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '2');">Add a checkbox input</button>
 			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '3');">Add a radio button input</button>
@@ -49,7 +60,7 @@ ORDER BY id DESC
 			<button type="button" class="btn btn-primary btn-sm" onClick="addInput('dynamicInput', '5');">Add a Date field option</button>
 			<br>
 			<br>
-		
+			</div>
 	</div>
 </div>
 <br>
@@ -63,18 +74,21 @@ ORDER BY id DESC
 
 <button type="submit" class="btn btn-primary btn-sm" onClick= "submit_form()" ;"> Submit </button>&nbsp;<button class="btn btn-danger btn-sm" type="Reset"> Clear Form </button>
 
-<div name="footerTry" id="footerTry">
-  
-  <img style="height: 50px;display: block;margin: auto;" src="../assets/img/footer.png">
-  
-  </div> 
-
 </form>
+ 
+
  
 </body>
   
-  
+
 <cfif not url.isAJAX>
-	<rde:header mode="end" page="index" import="../">
+	<rde:header_builder mode="end" page="index" import="../">
 </cfif>
 
+<div class ="container" style="min-height:20%; position:relative;" >
+<div name ="footerTry" id="footerTry">
+  
+  <img style="height: 50px;display: block;margin: auto; position:absolute; bottom:0;" src="../assets/img/footer.png">
+  
+   </div>
+  </div>
