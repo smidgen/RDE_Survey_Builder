@@ -22,32 +22,18 @@
  
  <cfset variables.randId=FORM["randId"]>
  
+ 
+<cfquery datasource="#application.dataDSN#" name="addSurvey">
+        INSERT INTO dbo.Survey(Name , surveyKey)
+        VALUES('#Form.Name#', '#randId#');
 
-<cfquery name="getSurveyid" datasource="#application.dataDSN#">
-
-SELECT TOP 1 *
-FROM dbo.Survey
-ORDER BY id DESC
-
+        SELECT SCOPE_IDENTITY() AS id;
 </cfquery>
 
-
-
-<cfoutput query="getSurveyid">
-	<cfset Surveyid = getSurveyid.id>
-</cfoutput>
+<cfset Surveyid = addSurvey.id>
 
 
 <!---<cfset variables.uniqueId = randId & Surveyid>--->
-
-
-<cfquery datasource="#application.dataDSN#" name="addSurvey" > 
-	
-	INSERT INTO dbo.Survey(Name , surveyKey, Description)
-	VALUES('#Form.Name#', '#randId#', '#Form.Description#')
-	
-</cfquery>
-
 
  
 <cfloop index="i" from="1" to="#variables.Counter#">
