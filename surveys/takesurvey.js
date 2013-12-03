@@ -4,21 +4,34 @@ $(document).ready(function () {
 	
     $('#next').on('click', getNext);
     $('#prev').on('click', getPrev);
-
+    $('#submit').hide();
 });
 
 function getNext() {
 	
-    var $curr = $('.form-group:visible'),
-        $next = ($curr.next().length) ? $curr.next() : $('.form-group').first();
+    var $curr = $('.form-group:visible');
+       // $next = ($curr.next().length) ? $curr.next() : $('.form-group').first();
+    if($curr.next().length){ 
+    	var $next = $curr.next(); 
+        transition($curr, $next);
+    }else{
+    	console.log('no more next');
+    	$('#submit').show();
+    }
 
-    transition($curr, $next);
 }
 
 function getPrev() {
-    var $curr = $('.form-group:visible'),
-        $next = ($curr.prev().length) ? $curr.prev() : $('.form-group').last();
-    transition($curr, $next);
+    var $curr = $('.form-group:visible');
+        //$next = ($curr.prev().length) ? $curr.prev() : $('.form-group').last();
+    if($curr.prev().length){ 
+    	var $next = $curr.prev(); 
+    	transition($curr, $next);
+    }else{
+    	console.log('no more prev');
+    	
+    }
+    
 }
 
 function transition($curr, $next) {

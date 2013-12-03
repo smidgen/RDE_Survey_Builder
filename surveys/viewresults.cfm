@@ -11,22 +11,18 @@
 	<cffunction name="results">
 		<cfargument name="surveyid">
 		<cfquery name="qResponses" datasource="#application.dataDSN#">
-            SELECT Survey_Taken.*, Response.Question_id, Response.Survey_Taken_id, Response.User_response, Question.Question
+            SELECT *
 			FROM Survey_Taken
-	            LEFT JOIN Response
-					ON Survey_Taken.id = Response.Survey_Taken_id
-				LEFT JOIN Question
-					ON Response.Question_id = Question.id
 			WHERE Survey_Taken.surveyKey = <cfqueryparam value="#surveyid#" cfsqltype="cf_sql_varchar">
 		</cfquery>
 		<cfscript>
 
 	        		for (row = 1 ; row LTE qResponses.RecordCount ; row = (row + 1)){
 				 		WriteOutput('<tr>');
+				 		WriteOutput('<td><a href="viewuserresults.cfm?userid=' & qResponses[ "id" ][ row ] & '">' & qResponses[ "id" ][ row ] & '</a></td>');
 				  		WriteOutput('<td>' & qResponses[ "Ip_address" ][ row ] & '</td>');
 				  		WriteOutput('<td>' & qResponses[ "Date" ][ row ] & '</td>');
-				  		WriteOutput('<td>' & qResponses[ "Question" ][ row ] & '</td>');
-				  		WriteOutput('<td>' & qResponses[ "User_response" ][ row ] & '</td>');
+				  		WriteOutput('<td>' & qResponses[ "surveyKey" ][ row ] & '</td>');
 						WriteOutput('</tr>');
 					}
 
@@ -36,10 +32,10 @@
 <div class="table-responsive">
   <table class="table table-bordered">
     <tr>
+    	<td><strong>User ID</strong></td>
     	<td><strong>IP</strong></td>
 		<td><strong>Date</strong></td>
-		<td><strong>Question</strong></td>
-		<td><strong>Answer</strong></td>
+		<td><strong>Key</strong></td>
 	</tr>
 	<cfoutput>#results(URL.surveykey)#</cfoutput>
   </table>

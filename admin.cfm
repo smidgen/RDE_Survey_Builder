@@ -32,7 +32,7 @@
 				  		WriteOutput('<td>' & 'no description' & '</td>');
 				   		WriteOutput('<td class="active tablebutton"><a href="' & application.pageroot & 'surveys/takesurvey.cfm?surveykey=' & surveys[ "surveyKey" ][ row ] & '">Take</a></td>');
 				   		WriteOutput('<td class="success tablebutton"><a href="' & application.pageroot & 'surveys/viewresults.cfm?surveykey=' & surveys[ "surveyKey" ][ row ] & '">Results</a></td>');
-				   		WriteOutput('<td class="warning tablebutton"><a href="' & application.pageroot & 'builder/editsurvey.cfm?surveyid=' & surveys[ "Name" ][ row ] & '">Edit</a></td>');
+				   		//WriteOutput('<td class="warning tablebutton"><a href="' & application.pageroot & 'builder/editsurvey.cfm?surveyid=' & surveys[ "Name" ][ row ] & '">Edit</a></td>');
 				   		WriteOutput('<td class="danger tablebutton"><a href="' & application.pageroot & 'surveys/deletesurvey.cfm?surveyid=' & surveys[ "id" ][ row ] & '">Delete</a></td>');		    
 						WriteOutput('</tr>');
 					}
@@ -45,7 +45,7 @@
     <tr>
     	<td><strong>Survey</strong></td>
 		<td><strong>Description</strong></td>
-		<td colspan="4"><strong>Tools</strong></td>
+		<td colspan="3"><strong>Tools</strong></td>
 	</tr>
 	<cfoutput>#showlist()#</cfoutput>
   </table>

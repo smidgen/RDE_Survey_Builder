@@ -52,7 +52,7 @@ input[type=radio] { height: 34px }
 	<cfargument name="query">
 	<cfscript>
 		WriteOutput('<div class="page-header"><h1>Survey: ' & query[ "name" ][1] & "</h1></div>");
-		WriteOutput('<div class="jumbotron"><form class="form-horizontal questions" action="submitSurvey.cfm" method="POST"><fieldset>
+		WriteOutput('<div class="jumbotron"><form class="form-horizontal questions" action="submitSurvey.cfm?surveykey=' & query[ "surveyKey" ][1] & '" method="POST"><fieldset>
 
 		');
 	</cfscript>
@@ -143,9 +143,7 @@ input[type=radio] { height: 34px }
 		</cfif>
 
 	</cfloop>
-	<cfscript>
-		WriteOutput('<input type="hidden" name="surveykey" value="' & query[ "surveyKey" ][1] & '">');
-	</cfscript>
+
 </cffunction>
 
 

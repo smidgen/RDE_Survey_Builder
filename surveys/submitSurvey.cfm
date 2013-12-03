@@ -3,26 +3,19 @@
 
 
 
-    <cfloop collection=#form# item="entry">
-		<cfif not #entry# eq 'FIELDNAMES'>
-		<cfif #entry# eq 'SURVEYKEY'>
 
 
-			<cfoutput>#storesurvey(form[entry], CGI.REMOTE_ADDR, curr)#</cfoutput>
-		</cfif>
-		</cfif>
-    </cfloop>
+			<cfoutput>#storesurvey(URL.surveykey, CGI.REMOTE_ADDR, curr)#</cfoutput>
+
 
     <cfset currentid = getstoresurveyid(curr)>
 	<cfset currentid = currentid["id"]>
 
     <cfloop collection=#form# item="entry">
 		<cfif not #entry# eq 'FIELDNAMES'>
-		<cfif not #entry# eq 'SURVEYKEY'>
 			<cfoutput>#currentid#, #entry#, #form[entry]#</cfoutput>
 			<cfoutput>#storequestion(currentid, entry, form[entry])#</cfoutput>
 
-		</cfif>
 		</cfif>
     </cfloop>
 
